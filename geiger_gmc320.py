@@ -9,8 +9,8 @@ import time
 import datetime
 import serial
 
-useraccountid = '01165'
-geigercounterid = '2300974695'
+useraccountid = ''
+geigercounterid = ''
 
 device = "GQ_GMC_320E_plus"     # name of your device
 port = "/dev/ttyUSB0"
