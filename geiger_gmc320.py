@@ -9,8 +9,8 @@ import time
 import datetime
 import serial
 
-useraccountid = ''
-geigercounterid = ''
+useraccountid = '01165'
+geigercounterid = '2300974695'
 
 device = "GQ_GMC_320E_plus"     # name of your device
 port = "/dev/ttyUSB0"
@@ -35,6 +35,16 @@ print "{:<10} {:<10} {:<10} {:<10}".format(data['rad_cpm'],data['rad_nsvh'],data
 import urllib2
 urllib2.urlopen('http://www.gmcmap.com/log2.asp?AID='+useraccountid+'&GID='+geigercounterid+'&CPM='+str(data['rad_cpm'])+'&uSV='+str(data['rad_nsvh']))
  
-                
+
 ser.close()
+
+f = open("/var/www/html/index.html", "w")
+f.write("<html><body>")
+f.write("<label for=""cpm"">CPM:"+str(data['rad_cpm'])+"</label>")
+f.write("<meter id=""cpm"" value="+str(data['rad_cpm'])+" min=""5"" max=""50"">"+str(data['rad_cpm'])+"</meter>")
+f.write("<br/><a href=""https://www.gmcmap.com/historyData.asp?Param_ID="+geigercounterid+""+">History</a>")
+f.write("</html></body>")
+f.close()
+
+
 exit()
